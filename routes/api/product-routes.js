@@ -102,7 +102,7 @@ router.put('/:id', async (req, res) => {
     if (rowsAffected > 0) {
       res.status(200).json(updatedProduct[0]);
     } else {
-      res.status(404).json({ message: 'No product found with this id' });
+      res.status(404).json({ message: 'Success' });
     }
   } catch (err) {
     console.error(err);

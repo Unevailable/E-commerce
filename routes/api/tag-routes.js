@@ -46,16 +46,19 @@ router.post('/', async (req, res) => {
   }
 });
 
+
 router.put('/:id', async (req, res) => {
   try {
     // update a tag's name by its `id` value
-    const [rowsAffected, updatedTag] = await Tag.update(req.body, {
+    const answer = await Tag.update(req.body, {
       where: { id: req.params.id },
-      returning: true,
+    
     });
 
-    if (rowsAffected > 0) {
-      res.status(200).json(updatedTag[0]);
+    console.log('answer:', answer);
+
+    if (answer) {
+      res.status(200).json({ message: 'Tag edited successfully' });
     } else {
       res.status(404).json({ message: 'No tag found with this id' });
     }
@@ -64,6 +67,7 @@ router.put('/:id', async (req, res) => {
     res.status(400).json(err);
   }
 });
+
 
 router.delete('/:id', async (req, res) => {
   try {
